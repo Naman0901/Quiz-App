@@ -4,6 +4,12 @@ exports.addtest = async (req,res)=>{
     const test = await pool.query("insert into quiz(name) values ($1) returning *",[req.body.qname]);
     res.json(test.rows[0]);
 }
+
+exports.deltest = async (req,res)=>{
+    const test = await pool.query("delete from quiz where id = $1",[req.params.id]);
+    res.json("deleted");
+}
+
 exports.addquestion = async (req,res)=>{
     const ques = await pool.query("insert into questions(ques,answer,options,test_id) values ($1,$2,$3,$4) returning *",[req.body.ques,req.body.answer,req.body.options,req.body.test_id]);
     res.json(ques.rows[0]);
